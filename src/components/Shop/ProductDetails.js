@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import Card from "../UI/Card";
+import { cartActions } from "../../store/cart-slice";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -20,6 +21,9 @@ const ProductDetails = () => {
 
   console.log("products::", product);
 
+ const addToCartHandler=(product)=>{
+   dispatch(cartActions.addToCart(product))
+ }
   return (
     <div>
       <Card>
@@ -36,7 +40,7 @@ const ProductDetails = () => {
         <p>{product.description}</p>
         <p>${product.price}</p>
         <button 
-        // onClick={() => dispatch(addToCart(product))}
+        onClick={() => addToCartHandler(product)}
         >Add to Cart</button>
       </Card>
     </div>
